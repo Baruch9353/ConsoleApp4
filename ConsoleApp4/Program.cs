@@ -15,6 +15,7 @@ namespace c__SQL.DAL
         {
             DAL dal = new DAL();
             dal.GetAgents();
+            dal.printAgentList();
         }
     }
 }
