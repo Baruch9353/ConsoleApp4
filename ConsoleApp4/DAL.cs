@@ -103,5 +103,66 @@ namespace c__SQL.DAL
                 Console.WriteLine(agent);
             }
         }
+        public void AddAgent(Agent agent)
+        {
+            try
+            {
+                openConnection();
+                string query = "INSERT INTO agents (codeName, realName, location, status, missionsCompleted) VALUES ('"
+                    + agent.CodeName + "', '"
+                    + agent.RealName + "', '"
+                    + agent.Location + "', '"
+                    + agent.Status + "', "
+                    + agent.MissionsCompleted + ")";
+                MySqlCommand cmd = new MySqlCommand(query, _conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error adding agent: " + ex.Message);
+            }
+            finally
+            {
+                closeConnection();
+            }
+        }
+        public void UpdateAgentLocation(int agentId, string newLocation)
+        {
+            try
+            {
+                openConnection();
+                string query = "UPDATE agents SET location = '" + newLocation + "' WHERE id = " + agentId;
+                MySqlCommand cmd = new MySqlCommand(query, _conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error updating location: " + ex.Message);
+            }
+            finally
+            {
+                closeConnection();
+            }
+        }
+        public void DeleteAgent(int agentId)
+        {
+            try
+            {
+                openConnection();
+                string query = "DELETE FROM agents WHERE id = " + agentId;
+                MySqlCommand cmd = new MySqlCommand(query, _conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error deleting agent: " + ex.Message);
+            }
+            finally
+            {
+                closeConnection();
+            }
+        }
+
+
     }
 }
